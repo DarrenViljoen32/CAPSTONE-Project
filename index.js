@@ -10,7 +10,7 @@ import adminRouter from './routes/admins.js'
 import postRouter from './routes/posts.js'
 
 // import { registerAdmin, checkAdmin } from './models/database.js'
-import {auth} from '../backend/middleware/admin.js'
+import {auth} from './middleware/admin.js'
 
 config();
 
