@@ -16,7 +16,7 @@ export default{
     Footer,
     Spinner
   },
-
+ 
   data() {
     return {
       

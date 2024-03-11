@@ -4,27 +4,32 @@ import router from '@/router'
 
 axios.defaults.withCredentials = true;
 
-const baseUrl = 'http://localhost:8090'
-
+const baseUrl = 'https://capstone-project-4.onrender.com'
+  
 export default createStore({
   state: {
     users: null,
     admins: null,
-    loggedin: false
+    loggedin: false,
+    loginMessage: null,
   },
   getters: {
-  },
+  }, 
   mutations: {
-    setUsers(state,payload){
+    setUsers(state, payload){
       state.users = payload
     },
 
-    setAdmins(state,payload){
+    setAdmins(state, payload){
       state.admins = payload
     },
 
-    setLogged(state,payload){
+    setLogged(state, payload){
       state.loggedin = payload
+    },
+
+    setLoginMessage(state, message){
+      state.loginMessage = message
     }
   },
   actions: {
@@ -33,9 +38,13 @@ export default createStore({
 
     //get all users
     async getUsers({commit}){
-      let {users} = await axios.get(baseUrl + '/users')
-      console.log(users);
-      commit('setUsers', users)
+      try{
+        let users = await axios.get(baseUrl + '/users')
+        console.log(users);
+        commit('setUsers', users.data)
+      }catch(error){
+        console.error('Error fetching users: ' , error);
+      }
     },
 
     //get one user
@@ -52,7 +61,7 @@ export default createStore({
 
     //update user
     async editUser({commit}, update){
-      await axios.post(baseUrl + '/users/' + update.user_ID, update)
+      await axios.patch(baseUrl + '/users/' + update.user_ID, update)
       window.location.reload()
     },
 
@@ -60,7 +69,8 @@ export default createStore({
     async addUser({commit}, add){
       console.log(add);
       let {data} = await axios.post(baseUrl + '/users', add)
-      alert(data.msg)
+      // alert(data.msg)
+
       window.location.reload()
     },
 
@@ -96,21 +106,28 @@ export default createStore({
 
     //add admin
     async addAdmin({commit}, add){
-      console.log(add);
-      let {data} = await axios.post(baseUrl + '/admins' , add)
-      alert(data.msg)
-      window.location.reload()
+      
+      try{
+        console.log(add);
+        let {data} = await axios.post(baseUrl + '/admins' , add)
+        alert(data.msg)
+        window.location.reload()
+      }catch (err){
+        console.error('Error adding user: ', err);
+      }
     },
 
     //login as admin
     async loginAdmin({commit}, admin_Password){
-      console.log(admin_Password);
-      let {data} = await axios.post(baseUrl + '/login', admin_Password)
+        console.log(admin_Password);
+        let {data} = await axios.post(baseUrl + '/login', admin_Password)
+  
+        $cookies.set('jwt', data.token)
+        commit('setLoginMessage', data.msg)
+        
+        alert(data.msg)
+        await router.push('/home')
 
-      $cookies.set('jwt', data.token)
-      alert(data.msg)
-
-      await router.push('/home')
 
       //commit('setLogged', true)
       // window.location.reload()
