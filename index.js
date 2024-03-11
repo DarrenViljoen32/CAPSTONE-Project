@@ -5,11 +5,11 @@ import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import userRouter from '../backend/routes/users.js'
-import adminRouter from '../backend/routes/admins.js'
-import postRouter from '../backend/routes/posts.js'
+import userRouter from './routes/users.js'
+import adminRouter from './routes/admins.js'
+import postRouter from './routes/posts.js'
 
-import { registerAdmin, checkAdmin } from './models/database.js'
+// import { registerAdmin, checkAdmin } from './models/database.js'
 import {auth} from '../backend/middleware/admin.js'
 
 config();
@@ -18,10 +18,12 @@ const PORT = process.env.PORT
     
 const app = express();
     
-app.use(cors({
+app.use(cors(
+    {
     origin: 'http://localhost:8080',
     credentials: true
-})); 
+    }
+)); 
 
 app.use(express.json());
 app.use(cookieParser())
