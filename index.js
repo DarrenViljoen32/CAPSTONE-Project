@@ -13,7 +13,7 @@ import postRouter from './routes/posts.js'
 import {auth} from './middleware/admin.js'
 
 config();
-
+ 
 const PORT = process.env.PORT
     
 const app = express();
@@ -70,13 +70,13 @@ app.use('/posts', postRouter)
 //                 msg: 'The credetials are incorrect.'
 //             })
 //         }
-//     })
+//     }) 
 // } 
 
 app.post('/login', auth, (req,res)=>{
 })
 
-
+ 
 app.listen(PORT, ()=>{
     console.log('http://localhost:' + PORT);
 })
