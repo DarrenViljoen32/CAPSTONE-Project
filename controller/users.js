@@ -30,6 +30,9 @@ export default{
         const post = await addUser(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Image)
         try{
             res.send(await getUsers())
+            // res.send({
+            //     msg: "You have successfully created an admin account."
+            // }) 
         }catch(err){
             console.error(err);
             res.json({
