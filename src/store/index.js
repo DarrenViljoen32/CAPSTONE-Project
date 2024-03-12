@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '@/router'
+import Swal from 'sweetalert2';
 
 axios.defaults.withCredentials = true;
 
@@ -44,34 +45,55 @@ export default createStore({
         commit('setUsers', users.data)
       }catch(error){
         console.error('Error fetching users: ' , error);
+        Swal.fire('Error fetching users ', error)
       }
     },
 
     //get one user
     async getOneUser({commit}, userDetails){
-      await axios.post(baseUrl + '/users', userDetails)
-      window.location.reload()
+      try{
+        await axios.post(baseUrl + '/users', userDetails)
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error fetching a user ', err)
+      }
     },
 
     //delete user
     async deleteUser({commit}, user_ID){
-      await axios.delete(baseUrl + '/users/' + user_ID)
-      window.location.reload()
+      try{
+        await axios.delete(baseUrl + '/users/' + user_ID)
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error deleting a user ', err)
+      }
     },
 
     //update user
     async editUser({commit}, update){
-      await axios.patch(baseUrl + '/users/' + update.user_ID, update)
-      window.location.reload()
+      try{
+        await axios.patch(baseUrl + '/users/' + update.user_ID, update)
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error updating the user ', err)
+      }
     },
 
     //add user
     async addUser({commit}, add){
-      console.log(add);
-      let {data} = await axios.post(baseUrl + '/users', add)
-      // alert(data.msg)
-
-      window.location.reload()
+      try{
+        console.log(add);
+        let {data} = await axios.post(baseUrl + '/users', add)
+        // alert(data.msg)
+        Swal.fire(data.msg)
+        window.location.reload()
+      }catch(err){
+        console.error('Error adding user ', err);
+        Swal.fire('Error adding user ', err)
+      }
     },
 
 
@@ -80,28 +102,48 @@ export default createStore({
 
     //get all admins
     async getAdmins({commit}){
-      let {admins} = await axios.get(baseUrl + '/admins')
-      console.log(admins);
-      commit('setAdmins', admins)
+      try{
+        let admins = await axios.get(baseUrl + '/admins')
+        console.log(admins);
+        commit('setAdmins', admins.data)
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error fetching admins ', err)
+      }
     },
 
     //get one admin
     async getOneAdmin({commit}, adminDetails){
-      await axios.post(baseUrl + '/admins', adminDetails)
-      window.location.reload()
+      try{
+        await axios.post(baseUrl + '/admins', adminDetails)
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error fetching one admin ', err)
+      }
     },
 
     //delete admin
     async deleteAdmin({commit}, admin_ID){
-      await axios.delete(baseUrl + '/admins/' + admin_ID)
-
-      window.location.reload()
+      try{
+        await axios.delete(baseUrl + '/admins/' + admin_ID)
+  
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error deleting admin ', err)
+      }
     },
 
     //update admin
     async editAdmins({commit}, update){
-      await axios.post(baseUrl + '/admins/' + update.admin_ID, update)
-      window.location.reload()
+      try{
+        await axios.patch(baseUrl + '/admins/' + update.admin_ID, update)
+        window.location.reload()
+      }catch(err){
+        console.error(err);
+        Swal.fire('Error updating admin ', err)
+      }
     },
 
     //add admin
@@ -110,10 +152,12 @@ export default createStore({
       try{
         console.log(add);
         let {data} = await axios.post(baseUrl + '/admins' , add)
-        alert(data.msg)
+        // alert(data.msg)
+        Swal.fire(data.msg)
         window.location.reload()
       }catch (err){
-        console.error('Error adding user: ', err);
+        console.error('Error adding admin ', err);
+        Swal.fire('Error adding admin ', err)
       }
     },
 
@@ -125,7 +169,8 @@ export default createStore({
         $cookies.set('jwt', data.token)
         commit('setLoginMessage', data.msg)
         
-        alert(data.msg)
+        // alert(data.msg)
+        Swal.fire(data.msg)
         await router.push('/home')
 
 
