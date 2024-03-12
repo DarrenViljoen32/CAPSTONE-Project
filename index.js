@@ -11,6 +11,7 @@ import postRouter from './routes/posts.js'
 
 // import { registerAdmin, checkAdmin } from './models/database.js'
 import {auth} from './middleware/admin.js'
+// import {authorize} from './middleware/users.js'
 
 config();
  
@@ -72,6 +73,9 @@ app.use('/posts', postRouter)
 //         }
 //     }) 
 // } 
+
+// app.post('/users', authorize, (req,res)=>{
+// })
 
 app.post('/login', auth, (req,res)=>{
 })
