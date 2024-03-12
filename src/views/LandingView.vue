@@ -1,6 +1,7 @@
 <template>
     <div class="landing">
-        <h1>Landing Page</h1>
+        <h1>UNBOUND</h1>
+        <h4>Social Media Platform</h4>
         <br><br><br>
 
         <router-link to="/signin"><button>Sign Up</button></router-link>
