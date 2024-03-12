@@ -31,7 +31,7 @@ export default{
             if(err) throw err
             await registerAdmin(admin_Name, admin_Email, hash)
             res.send({
-                msg: "You have successfully created an admin account."
+                msg: "You have successfully created an admin account. Now login with your credentials."
             })  
         })
     },

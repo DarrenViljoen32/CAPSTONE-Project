@@ -23,10 +23,11 @@ const getOneUser = async(user_ID)=>{
 
 //add user
 const addUser = async(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Image)=>{
-    const [user] = await pool.query(`
+    // const [user] = 
+    await pool.query(`
         INSERT INTO users (user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Image) VALUES (?,?,?,?,?,?,?)
     `,[user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Image])
-    return getOneUser(user.insertId)
+    // return getOneUser(user.insertId)
 }  
 
 //delete user
@@ -48,4 +49,12 @@ const editUser = async(user_Name, user_Surname, user_Age, user_Gender, user_Emai
     return user
 } 
 
-export {getUsers, getOneUser, addUser, deleteUser, editUser}
+//check user
+const  checkUser = async (user_Name) =>{
+    const [[{user_Password}]] = await pool.query(`
+        SELECT user_Password FROM users WHERE user_Name = ?
+    `,[user_Name])
+    return user_Password
+}
+
+export {getUsers, getOneUser, addUser, deleteUser, editUser, checkUser}
