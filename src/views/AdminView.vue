@@ -426,7 +426,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 /* hide scrollbar */
 *{
   overflow-x: hidden;

@@ -11,6 +11,7 @@ export default createStore({
   state: {
     users: null,
     admins: null,
+    posts: null,
     loggedin: false,
     loginMessage: null,
   },
@@ -23,6 +24,10 @@ export default createStore({
 
     setAdmins(state, payload){
       state.admins = payload
+    },
+
+    setPosts(state, payload){
+      state.posts = payload
     },
 
     setLogged(state, payload){
@@ -52,7 +57,7 @@ export default createStore({
     //get one user
     async getOneUser({commit}, userDetails){
       try{
-        await axios.post(baseUrl + '/users', userDetails)
+        await axios.get(baseUrl + '/users', userDetails)
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -115,7 +120,7 @@ export default createStore({
     //get one admin
     async getOneAdmin({commit}, adminDetails){
       try{
-        await axios.post(baseUrl + '/admins', adminDetails)
+        await axios.get(baseUrl + '/admins', adminDetails)
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -185,6 +190,67 @@ export default createStore({
 
       $cookies.remove('jwt')
       // window.location.reload()
+    },
+
+
+    //POSTS
+
+    //get all posts
+    async getPosts({commit}){
+      try{
+        let posts = await axios.get(baseUrl + '/posts')
+        console.log(posts);
+        commit('setPosts', posts.data)
+      }catch(error){
+        console.error('Error fetching users ', error);
+        Swal.fire('Error fetching users ', error)
+      }
+    },
+
+    //get one post
+    async getOnePost({commit}, postDetails){
+      try{
+        await axios.get(baseUrl + '/posts/', postDetails)
+        window.location.reload()
+      }catch(err){
+        console.error('Error fetching a user ', err);
+        Swal.fire('Error fetching a user ', err)
+      }
+    },
+
+    //delete post
+    async deletePost({commit}, post_ID){
+      try{
+        await axios.delete(baseUrl + '/posts/' + post_ID)
+        window.location.reload()
+      }catch(err){
+        console.error('Error deleting post ', err);
+        Swal.fire('Error deleting post ', err)
+      }
+    },
+
+    //update post
+    async editPost({commit}, update){
+      try{
+        await axios.patch(baseUrl + '/posts/' + update.post_ID, update)
+        window.location.reload()
+      }catch(err){
+        console.error('Error updating post ', err);
+        Swal.fire('Error updating post ', err)
+      }
+    },
+
+    //add post
+    async addPost({commit}, add){
+      try{
+        console.log(add);
+        let {data} = await axios.post(baseUrl + '/posts', add)
+        Swal.fire(data.msg)
+        window.location.reload()
+      }catch(err){
+        console.error('Error adding post ', err);
+        Swal.fire('Error adding post ', err)
+      }
     }
   },
   modules: {
