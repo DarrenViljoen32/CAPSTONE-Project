@@ -9,19 +9,29 @@
 
       <div class="row">
         <div class="col-lg-3" id="divider">
+
+          <h3 id="sortfilter">Make A Post</h3>
+          <br>
+          <form >
+            <textarea type="text" name="post_Content" id="postInput" class="form-control" placeholder="Type your post here!" v-model="post_Content"></textarea>
+            <br>
+            <button type="button" @click="addPost">Post</button>
+          </form>
+          <br><br><br>
+
           <h3 id="sortfilter">Sort & Filter</h3>
-          <br><br>
+          <br>
 
           <form>
             <input type="text" id="filterUsers" class="form-control" placeholder="Filter By Name">
             <br>
+          </form>
             <!-- <button>Search <span class="bi bi-search"></span></button>
             <br><br> -->
             <button>Sort By Date <span class="bi bi-filter"></span></button>
             <br><br>
             <button>Sort By Name <span class="bi bi-filter"></span></button>
             <br><br>
-          </form>
 
         </div>
         <div class="col-lg-9">
@@ -88,17 +98,9 @@ export default {
         user_ID: null,
       },
 
-      user_ID: null,
       user_Name: null,
       user_Surname: null,
       user_Email: null,
-
-      // editedUsers: {
-      //   user_ID: null,
-      //   user_Name: null,
-      //   user_Surname: null,
-      //   user_Email: null
-      // },
 
       searchQuery: '',
       sortBy: '',
@@ -137,9 +139,20 @@ export default {
 
     addPost(){
       try{
-        this.$store.dispatch('addPost', this.$data)
+        const postContent = this.post_Content.trim()
+        if(postContent){
+          this.$store.dispatch('addPost', {post_Content: postContent})
+            .then(() => {
+              this.post_Content = ''
+            })
+            .catch(error => {
+              console.error('Error adding post:', error);
+            })
+        }else{
+          console.error('Post Content cannot be empty.');
+        }
       }catch(err){
-        console.error(err);
+        console.error('Error adding post:', err);
       }
     },
 
@@ -236,6 +249,13 @@ h3{
   margin-right: 10px;
   margin-left: 50px;
   width: 75%;
+}
+#postInput{
+  margin-right: 10px;
+  margin-left: 50px;
+  width: 70%;
+  height: 200px;
+
 }
 #postBlock{
   text-align: left;
