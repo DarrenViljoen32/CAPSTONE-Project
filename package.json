@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "npm init -y\r npm install\r bcrypt cookie-parse corse dotenv express jsonwebtoken mysql2 nodemon vue3-cookies",
   "main": "index.js",
   "type": "module",
   "scripts": {
