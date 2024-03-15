@@ -123,6 +123,53 @@
           </div>
 
 
+          <!-- Add Post Modal -->
+          <div class="modal fade" id="exampleModal00" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Post</h5>
+                  <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                  <input type="text" name="post_Title" id="post_Title" placeholder="Post Title" v-model="post_Title">
+                  <br><br>
+                  <input type="text" name="post_Content" id="post_Content" placeholder="Post Content" v-model="post_Content">
+                  <br><br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bs-dismiss="modal">Close</button>
+                  <button type="button" @click="addPost">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Edit Post Modal -->
+          <div class="modal fade" id="exampleModal01" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="post in $store.state.posts" :key="post.post_ID">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+                  <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                  <input type="text" name="post_Title2" id="post_Title2" placeholder="Post Title" v-model="editedPosts.post_Title">
+                  <br><br>
+                  <input type="text" name="post_Content" id="post_Content2" placeholder="Post Content" v-model="editedPosts.post_Content">
+                  <br><br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bs-dismiss="modal">Close</button>
+                  <button @click="postEdit">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      
+
+
           <!-- USERS -->
         <div v-if="loadingUsers">
 
@@ -253,7 +300,7 @@
                 <td>{{ post.post_Content }}</td>
                 <!-- <td>{{ post.user_ID }}</td> -->
                 <td>
-                  <button class="bi bi-pencil" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal02"></button>
+                  <button class="bi bi-pencil" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal01"></button>
                   <br><br>
                   <button class="bi bi-dash-lg" title="Delete Post" @click="deletePost(post.post_ID)"></button>
                 </td>
@@ -331,7 +378,8 @@ export default{
             editedPosts: {
               post_ID: null,
               post_Title: null,
-              post_Content: null
+              post_Content: null,
+              user_ID: null
             },
 
             modalVisable: false,
@@ -508,7 +556,7 @@ export default{
 
     clearPostInput(){
       this.post_Title = ''
-      this.post_Content
+      this.post_Content = ''
     },
 
     postEdit(){
