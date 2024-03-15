@@ -222,6 +222,52 @@
         </div>
 
 
+        <!-- POSTS -->
+        <div v-if="loadingPosts">
+          <div class="row">
+
+            <div class="col-lg-6" id="subTitle">
+              <h2>Posts</h2>
+            </div>
+
+            <div class="col-lg-6" id="crudIcons">
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal00" class="bi bi-plus-lg" title="Add Post" @click="clearPostInput"></button>Add Post
+            </div>
+
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <!-- <th>User ID</th> -->
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="post in posts" :key="post.post_ID">
+                <th>{{ post.post_ID }}</th>
+                <td>{{ post.post_Title }}</td>
+                <td>{{ post.post_Content }}</td>
+                <!-- <td>{{ post.user_ID }}</td> -->
+                <td>
+                  <button class="bi bi-pencil" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal02"></button>
+                  <br><br>
+                  <button class="bi bi-dash-lg" title="Delete Post" @click="deletePost(post.post_ID)"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div v-else>
+          <Spinner/>
+        </div>
+
+
 
     </div>
 </template>
@@ -240,9 +286,11 @@ export default{
         return{
             users: [],
             admins: [],
+            posts: [],
 
             loadingUsers: true,
             loadingAdmins: true,
+            loadingPosts: true,
             
             user_ID: null,
             user_Name: null,
@@ -274,6 +322,16 @@ export default{
               admin_Name: null,
               admin_Email: null,
               admin_Password: null,
+            },
+
+            post_ID: null,
+            post_Title: null,
+            post_Content: null,
+
+            editedPosts: {
+              post_ID: null,
+              post_Title: null,
+              post_Content: null
             },
 
             modalVisable: false,
@@ -410,10 +468,63 @@ export default{
       }catch(err){
         console.error(err);
       }
-    }
+    },
 
+    //POSTS
+  
+    async displayPosts(){
+      try{
+        this.loadingPosts = false
+        await this.$store.dispatch('getPosts')
+        this.posts = this.$store.state.posts
+      }catch(err){
+        console.error(err);
+      }finally{
+        this.loadingPosts = true
+      }
+    },
+
+    deletePost(post_ID){
+      try{
+        this.$store.dispatch('deletePost', post_ID)
+      }catch(err){
+        console.error(err);
+      }
+    },
+
+    addPost(){
+      try{
+        this.$store.dispatch('addPost', this.$data)
+      }catch(err){
+        console.error(err);
+      }
+    },
+
+    populatePostFields(post){
+      this.post_Title = post.post_Title
+      this.post_Content = post.post_Content
+      this.editedPosts = {...post}
+    },
+
+    clearPostInput(){
+      this.post_Title = ''
+      this.post_Content
+    },
+
+    postEdit(){
+      try{
+        this.$store.dispatch('editPost', this.editedPosts)
+        this.editedPosts = {
+          post_Title : null,
+          post_Content : null        
+        }
+      }catch(err){
+        console.error(err);
+      }
+    },
 
   },
+
     
   computed:{
 
@@ -422,6 +533,7 @@ export default{
   mounted(){
     this.displayUsers()
     this.displayAdmins()
+    this.displayPosts()
   }
 }
 </script>
