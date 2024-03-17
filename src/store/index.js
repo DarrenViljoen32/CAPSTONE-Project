@@ -36,6 +36,10 @@ export default createStore({
 
     setLoginMessage(state, message){
       state.loginMessage = message
+    },
+
+    setAdmin(state, adminData){
+      state.admins = adminData
     }
   },
   actions: {
@@ -68,7 +72,12 @@ export default createStore({
     //delete user
     async deleteUser({commit}, user_ID){
       try{
-        await axios.delete(baseUrl + '/users/' + user_ID)
+        let {data}= await axios.delete(baseUrl + '/users/' + user_ID)
+        if (data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Deleted successfully.")
+        }
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -79,7 +88,12 @@ export default createStore({
     //update user
     async editUser({commit}, update){
       try{
-        await axios.patch(baseUrl + '/users/' + update.user_ID, update)
+        let {data} = await axios.patch(baseUrl + '/users/' + update.user_ID, update)
+        if (data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Updated successfully.")
+        }
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -131,8 +145,13 @@ export default createStore({
     //delete admin
     async deleteAdmin({commit}, admin_ID){
       try{
-        await axios.delete(baseUrl + '/admins/' + admin_ID)
-  
+        console.log(admin_ID);
+        let {data} = await axios.delete(baseUrl + '/admins/' + admin_ID)
+        if(data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Successfully Deleted Account.")
+        }
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -143,7 +162,12 @@ export default createStore({
     //update admin
     async editAdmins({commit}, update){
       try{
-        await axios.patch(baseUrl + '/admins/' + update.admin_ID, update)
+        let {data} = await axios.patch(baseUrl + '/admins/' + update.admin_ID, update)
+        if(data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Successfully Updated Account.")
+        }
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -158,8 +182,8 @@ export default createStore({
         console.log(add);
         let {data} = await axios.post(baseUrl + '/admins' , add)
         // alert(data.msg)
+        // window.location.reload()
         Swal.fire(data.msg)
-        window.location.reload()
       }catch (err){
         console.error('Error adding admin ', err);
         Swal.fire('Error adding admin ', err)
@@ -170,6 +194,9 @@ export default createStore({
     async loginAdmin({commit}, admin_Password){
         console.log(admin_Password);
         let {data} = await axios.post(baseUrl + '/login', admin_Password)
+
+        const adminDetails = data.admins
+        commit('setAdmin', adminDetails)
   
         $cookies.set('jwt', data.token)
         commit('setLoginMessage', data.msg)
@@ -221,7 +248,13 @@ export default createStore({
     //delete post
     async deletePost({commit}, post_ID){
       try{
-        await axios.delete(baseUrl + '/posts/' + post_ID)
+        console.log(post_ID);
+        let {data} = await axios.delete(baseUrl + '/posts/' + post_ID) 
+        if(data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Successfully Deleted Post.")
+        }
         window.location.reload()
       }catch(err){
         console.error('Error deleting post ', err);
@@ -232,7 +265,12 @@ export default createStore({
     //update post
     async editPost({commit}, update){
       try{
-        await axios.patch(baseUrl + '/posts/' + update.post_ID, update)
+        let {data} = await axios.patch(baseUrl + '/posts/' + update.post_ID, update)
+        if(data.msg){
+          Swal.fire(data.msg)          
+        }else{
+          Swal.fire("Successfully Updated Post.")
+        }
         window.location.reload()
       }catch(err){
         console.error('Error updating post ', err);
@@ -245,7 +283,11 @@ export default createStore({
       try{
         console.log(add);
         let {data} = await axios.post(baseUrl + '/posts', add)
-        Swal.fire(data.msg)
+        if(data.msg){
+          Swal.fire(data.msg)
+        }else{
+          Swal.fire("Successfully Added a Post.")
+        }
         window.location.reload()
       }catch(err){
         console.error('Error adding post ', err);
@@ -253,6 +295,7 @@ export default createStore({
       }
     }
   },
+
   modules: {
   }
 })

@@ -16,19 +16,19 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="user_Name" id="user_Name1" placeholder="First Name" v-model="user_Name">
+                  <input type="text" name="user_Name" placeholder="First Name" v-model="user_Name">
                   <br><br>
-                  <input type="text" name="user_Surname" id="user_Surname1" placeholder="Surname" v-model="user_Surname">
+                  <input type="text" name="user_Surname" placeholder="Surname" v-model="user_Surname">
                   <br><br>
-                  <input type="text" name="user_Age" id="user_Age1" placeholder="Age" v-model="user_Age">
+                  <input type="text" name="user_Age" placeholder="Age" v-model="user_Age">
                   <br><br>
-                  <input type="text" name="user_Gender" id="user_Gender1" placeholder="Gender" v-model="user_Gender">
+                  <input type="text" name="user_Gender" placeholder="Gender" v-model="user_Gender">
                   <br><br>
-                  <input type="email" name="user_Email" id="user_Email1" placeholder="Email" v-model="user_Email">
+                  <input type="email" name="user_Email" placeholder="Email" v-model="user_Email">
                   <br><br>
-                  <input type="password" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password">
+                  <input type="password" name="user_Password" placeholder="Password" v-model="user_Password">
                   <br><br>
-                  <input type="text" name="user_Image" id="user_Image1" placeholder="Image Url" v-model="user_Image">
+                  <input type="text" name="user_Image" placeholder="Image Url" v-model="user_Image">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -48,19 +48,19 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="user_Name" id="user_Name2" placeholder="First Name" v-model="editedUsers.user_Name">
+                  <input type="text" name="user_Name" placeholder="First Name" v-model="editedUsers.user_Name">
                   <br><br>
-                  <input type="text" name="user_Surname" id="user_Surname2" placeholder="Surname" v-model="editedUsers.user_Surname">
+                  <input type="text" name="user_Surname" placeholder="Surname" v-model="editedUsers.user_Surname">
                   <br><br>
-                  <input type="text" name="user_Age" id="user_Age2" placeholder="Age" v-model="editedUsers.user_Age">
+                  <input type="text" name="user_Age" placeholder="Age" v-model="editedUsers.user_Age">
                   <br><br>
-                  <input type="text" name="user_Gender" id="user_Gender2" placeholder="Gender" v-model="editedUsers.user_Gender">
+                  <input type="text" name="user_Gender" placeholder="Gender" v-model="editedUsers.user_Gender">
                   <br><br>
-                  <input type="email" name="user_Email" id="user_Email2" placeholder="Email" v-model="editedUsers.user_Email">
+                  <input type="email" name="user_Email" placeholder="Email" v-model="editedUsers.user_Email">
                   <br><br>
-                  <input type="password" name="user_Password" id="user_Password2" placeholder="Password" v-model="editedUsers.user_Password">
+                  <input type="password" name="user_Password" placeholder="Password" v-model="editedUsers.user_Password">
                   <br><br>
-                  <input type="text" name="user_Image" id="user_Image2" placeholder="Image Url" v-model="editedUsers.user_Image">
+                  <input type="text" name="user_Image" placeholder="Image Url" v-model="editedUsers.user_Image">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -82,11 +82,11 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="admin_Name" id="admin_Name1" placeholder="Full Name" v-model="admin_Name">
+                  <input type="text" name="admin_Name" placeholder="Full Name" v-model="admin_Name">
                   <br><br>
-                  <input type="email" name="admin_Email" id="admin_Email1" placeholder="Email" v-model="admin_Email">
+                  <input type="email" name="admin_Email" placeholder="Email" v-model="admin_Email">
                   <br><br>
-                  <input type="password" name="admin_Password" id="admin_Password1" placeholder="Password" v-model="admin_Password">
+                  <input type="password" name="admin_Password" placeholder="Password" v-model="admin_Password">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -107,11 +107,11 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="admin_Name" id="admin_Name2" placeholder="Full Name" v-model="editedAdmins.admin_Name">
+                  <input type="text" name="admin_Name" placeholder="Full Name" v-model="editedAdmins.admin_Name">
                   <br><br>
-                  <input type="email" name="admin_Email" id="admin_Email2" placeholder="Email" v-model="editedAdmins.admin_Email">
+                  <input type="email" name="admin_Email" placeholder="Email" v-model="editedAdmins.admin_Email">
                   <br><br>
-                  <input type="password" name="admin_Password" id="admin_Password2" placeholder="Password" v-model="editedAdmins.admin_Password">
+                  <input type="password" name="admin_Password" placeholder="Password" v-model="editedAdmins.admin_Password">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -132,9 +132,11 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="post_Title" id="post_Title" placeholder="Post Title" v-model="post_Title">
+                  <input type="text" name="post_Title" placeholder="Post Title" v-model="post_Title">
                   <br><br>
-                  <input type="text" name="post_Content" id="post_Content" placeholder="Post Content" v-model="post_Content">
+                  <input type="text" name="post_Content" placeholder="Post Content" v-model="post_Content">
+                  <br><br>
+                  <input type="text" name="user_ID" placeholder="userID" v-model="user_ID">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -154,9 +156,11 @@
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="post_Title2" id="post_Title2" placeholder="Post Title" v-model="editedPosts.post_Title">
+                  <input type="text" name="post_Title2" placeholder="Post Title" v-model="editedPosts.post_Title">
                   <br><br>
-                  <input type="text" name="post_Content" id="post_Content2" placeholder="Post Content" v-model="editedPosts.post_Content">
+                  <input type="text" name="post_Content" placeholder="Post Content" v-model="editedPosts.post_Content">
+                  <br><br>
+                  <input type="text" name="user_ID" placeholder="userID" v-model="editedPosts.user_ID">
                   <br><br>
                 </div>
                 <div class="modal-footer">
@@ -171,7 +175,7 @@
 
 
           <!-- USERS -->
-        <div v-if="loadingUsers">
+        <!-- <div v-if="loadingUsers">
 
           <div class="row">
             <div class="col-lg-6" id="subTitle">
@@ -192,9 +196,10 @@
                 <th>Age</th>
                 <th>Gender</th>
                 <th>Email</th>
-                <!-- <th>Password</th> -->
+                <th>Password</th>
                 <th>Image</th>
-                <th></th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -205,11 +210,12 @@
                 <td>{{ user.user_Age }}</td>
                 <td>{{ user.user_Gender }}</td>
                 <td>{{ user.user_Email }}</td>
-                <!-- <td>{{ user.user_Password }}</td> -->
+                <td>{{ user.user_Password }}</td>
                 <td><img v-bind:src= "user.user_Image" alt="Profile Photo" class="img-fluid"></td>
                 <td>
                   <button class="bi bi-pencil" title="Edit User" @click="populateUserFields(user)" data-bs-toggle="modal" data-bs-target="#exampleModal4"></button>
-                  <br><br>
+                </td>
+                <td>
                   <button class="bi bi-dash-lg" title="Delete User" @click="deleteUser(user.user_ID)"></button>
                 </td>
               </tr>
@@ -220,7 +226,7 @@
 
         <div v-else>
           <Spinner/>
-        </div>
+        </div> -->
 
         
         <!-- ADMINS -->
@@ -228,11 +234,11 @@
           <div class="row">
 
             <div class="col-lg-6" id="subTitle">
-              <h2>Admins</h2>
+              <h2>Users</h2>
             </div>
 
             <div class="col-lg-6" id="crudIcons">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg" title="Add Admin" @click="clearAdminInput"></button>Add Admin
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg" title="Add Admin" @click="clearAdminInput"></button>Add User
             </div>
 
           </div>
@@ -244,7 +250,8 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
-                <th></th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -255,8 +262,9 @@
                 <td>{{ admin.admin_Password }}</td>
                 <td>
                   <button class="bi bi-pencil" title="Edit Admin" @click="populateAdminFields(admin)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
-                  <br><br>
-                  <button class="bi bi-dash-lg" title="Delete Admin" @click="deleteAdmin(admin.admin_ID)"></button>
+                </td>
+                <td>
+                <button class="bi bi-dash-lg" title="Delete Admin" @click="deleteAdmin(admin.admin_ID)"></button>
                 </td>
               </tr>
             </tbody>
@@ -290,7 +298,8 @@
                 <th>Title</th>
                 <th>Content</th>
                 <!-- <th>User ID</th> -->
-                <th></th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -301,7 +310,8 @@
                 <!-- <td>{{ post.user_ID }}</td> -->
                 <td>
                   <button class="bi bi-pencil" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal01"></button>
-                  <br><br>
+                </td>
+                <td>
                   <button class="bi bi-dash-lg" title="Delete Post" @click="deletePost(post.post_ID)"></button>
                 </td>
               </tr>
@@ -487,6 +497,7 @@ export default{
     addAdmin(){
       try{
         this.$store.dispatch('addAdmin', this.$data)
+        window.location.reload()
       }catch(err){
         console.error(err);
       }
@@ -551,12 +562,14 @@ export default{
     populatePostFields(post){
       this.post_Title = post.post_Title
       this.post_Content = post.post_Content
+      this.user_ID = post.user_ID,
       this.editedPosts = {...post}
     },
 
     clearPostInput(){
       this.post_Title = ''
       this.post_Content = ''
+      this.user_ID = ''
     },
 
     postEdit(){
@@ -564,7 +577,8 @@ export default{
         this.$store.dispatch('editPost', this.editedPosts)
         this.editedPosts = {
           post_Title : null,
-          post_Content : null        
+          post_Content : null,
+          user_ID: null      
         }
       }catch(err){
         console.error(err);
