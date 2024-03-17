@@ -24,10 +24,9 @@ const getOnePost = async(post_ID)=>{
 //add post
 const addPost = async(post_Title, post_Content, post_Date, user_ID)=>{
     const [post] = await pool.query(`
-        INSERT INTO posts (post_Title, post_Content, post_Date, user_ID) VALUES (?,?,?,?)
-    `,[post_Title, post_Content, post_Date, user_ID])
+        INSERT INTO posts (post_Title, post_Content, post_Date, user_ID) VALUES (?,?,?,?)`,[post_Title, post_Content, post_Date, user_ID])
     return getOnePost(post.insertId)
-}  
+}
 
 //delete post
 const deletePost = async(post_ID)=>{
